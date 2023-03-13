@@ -1,0 +1,38 @@
+# Taps
+tap 'homebrew/cask'
+tap 'homebrew/cask-fonts'
+tap 'homebrew/cask-versions'
+tap 'homebrew/bundle'
+
+# Commandline tools
+brew "gh"
+brew "git"
+brew "mas" # Mac App Store Manager
+brew "ripgrep"
+brew "stow"
+
+# Terminal
+cask "iterm2"
+
+# Programming languages
+brew "julia"
+brew "python"
+brew "r"
+brew "rust"
+
+# Editors/IDE
+brew "neovim"
+cask "rstudio"
+
+# OS tools
+cask "rectangle"
+
+# Brower
+cask "brave-browser"
+
+# Fonts
+cask "font-fira-code"
+
+# Stuff from app store
+mas 'Giphy Capture', id: 668208984
+
