@@ -16,8 +16,10 @@ cask "iterm2"
 
 # Programming languages
 brew "julia"
-brew "python"
-brew "r"
+brew "python@3.11"
+# The r cask includes more of the system dependencies and by default installs
+# binary r packages rather than from source
+cask "r"
 brew "rust"
 
 # Editors/IDE
