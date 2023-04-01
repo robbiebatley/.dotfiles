@@ -10,6 +10,7 @@ brew "git"
 brew "mas" # Mac App Store Manager
 brew "ripgrep"
 brew "stow"
+cask "quarto"
 
 # Terminal
 cask "iterm2"
@@ -19,7 +20,7 @@ brew "julia"
 brew "python@3.11"
 # The r cask includes more of the system dependencies and by default installs
 # binary r packages rather than from source
-cask "r"
+cask "r", args: {"with-openblas": true}
 brew "rust"
 
 # Editors/IDE
