@@ -37,7 +37,8 @@ require("lazy").setup({
     },
   },
 
-  { -- Adds git releated signs to the gutter, as well as utilities for managing changes
+  {
+    -- Adds git releated signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
     opts = {
       -- See `:help gitsigns.txt`
@@ -48,15 +49,34 @@ require("lazy").setup({
         topdelete = { text = '‾' },
         changedelete = { text = '~' },
       },
+      on_attach = function(bufnr)
+        vim.keymap.set('n', '<leader>gp', require('gitsigns').prev_hunk, { buffer = bufnr, desc = '[G]o to [P]revious Hunk' })
+        vim.keymap.set('n', '<leader>gn', require('gitsigns').next_hunk, { buffer = bufnr, desc = '[G]o to [N]ext Hunk' })
+        vim.keymap.set('n', '<leader>ph', require('gitsigns').preview_hunk, { buffer = bufnr, desc = '[P]review [H]unk' })
+      end,
+    },
+  },
+  
+  {
+    -- Autocompletion
+    'hrsh7th/nvim-cmp',
+    dependencies = {
+      -- Snippet Engine & its associated nvim-cmp source
+      'L3MON4D3/LuaSnip',
+      'saadparwaiz1/cmp_luasnip',
+
+      -- Adds LSP completion capabilities
+      'hrsh7th/cmp-nvim-lsp',
+
+      -- Adds a number of user-friendly snippets
+      'rafamadriz/friendly-snippets',
     },
   },
 
-  { -- Autocompletion
-    'hrsh7th/nvim-cmp',
-    dependencies = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
-  },
+  -- Useful plugin to show you pending keybinds.
+  { 'folke/which-key.nvim', opts = {} },
 
-    { -- Set lualine as statusline
+  { -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
     -- See `:help lualine.txt`
     opts = {
@@ -68,6 +88,7 @@ require("lazy").setup({
       },
     },
   },
+
   { -- Add indentation guides even on blank lines
     'lukas-reineke/indent-blankline.nvim',
     -- Enable `lukas-reineke/indent-blankline.nvim`
@@ -97,14 +118,13 @@ require("lazy").setup({
     end,
   },
 
-  { -- Highlight, edit, and navigate code
+  {
+    -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
     },
-    config = function()
-      pcall(require('nvim-treesitter.install').update { with_sync = true })
-    end,
+    build = ':TSUpdate',
   },
 
   { 'rose-pine/neovim',
@@ -113,31 +133,8 @@ require("lazy").setup({
     config = function()
       vim.cmd.colorscheme 'rose-pine'
     end,
-  },
-
-  { 'quarto-dev/quarto-nvim',
-  dependencies = {
-      'jmbuhr/otter.nvim',
-      'hrsh7th/nvim-cmp',
-      'neovim/nvim-lspconfig',
-      'nvim-treesitter/nvim-treesitter'
-  },
-  config = function()
-      require 'quarto'.setup {
-          lspFeatures = {
-              enabled = true,
-              languages = { 'r', 'python', 'julia' },
-              diagnostics = {
-                  enabled = true,
-                  triggers = { "BufWrite" }
-              },
-              completion = {
-                  enabled = true
-              }
-          }
-      }
-  end
-  },
+  }
 
 })
+
 
